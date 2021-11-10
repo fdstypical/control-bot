@@ -1,0 +1,21 @@
+{
+  "name": "control-bot",
+  "version": "1.0.0",
+  "description": "Control your PC by telegram bot",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node src/app.js"
+  },
+  "keywords": [
+    "js",
+    "telegram",
+    "bot"
+  ],
+  "author": "fdstypical",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^10.0.0",
+    "telegraf": "^4.4.2"
+  }
+}
