@@ -1,16 +1,28 @@
+import path from "path";
 import cp from "child_process";
+import { config } from "../../configs/index.js";
 
 export default class ShComands {
-  tornOff() {
-    cp.exec("sh ./scripts/turn_off.sh", this.logExec);
+  #turn_off;
+  #sleep;
+  #lock;
+
+  constructor({ turn_off, sleep, lock }) {
+    this.#turn_off = path.join(config.SCRIPTS_DIR, turn_off);
+    this.#sleep = path.join(config.SCRIPTS_DIR, sleep);
+    this.#lock = path.join(config.SCRIPTS_DIR, lock);
   }
 
-  lock() {
-    cp.exec("sh ./scripts/lock.sh", this.logExec);
+  tornOff() {
+    cp.exec(`sh ${this.#turn_off}`, this.logExec);
   }
 
   sleep() {
-    cp.exec("sh ./scripts/sleep.sh", this.logExec);
+    cp.exec(`sh ${this.#sleep}`, this.logExec);
+  }
+
+  lock() {
+    cp.exec(`sh ${this.#lock}`, this.logExec);
   }
 
   logExec(error, stdout, stderr) {
