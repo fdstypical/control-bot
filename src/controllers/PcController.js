@@ -10,17 +10,32 @@ const comand = new ShComands({
 
 export default class PcController {
   static tornOff(ctx) {
-    comand.tornOff();
-    ctx.reply(slicer(ctx.message.text));
+    comand
+      .tornOff()
+      .then((stdout) => {
+        console.log(stdout);
+        ctx.reply(slicer(ctx.message.text));
+      })
+      .catch(console.error);
   }
 
   static sleep(ctx) {
-    comand.sleep();
-    ctx.reply(slicer(ctx.message.text));
+    comand
+      .sleep()
+      .then((stdout) => {
+        console.log(stdout);
+        ctx.reply(slicer(ctx.message.text));
+      })
+      .catch(console.error);
   }
 
   static lock(ctx) {
-    comand.lock();
-    ctx.reply(slicer(ctx.message.text));
+    comand
+      .lock()
+      .then((stdout) => {
+        console.log(stdout);
+        ctx.reply(slicer(ctx.message.text));
+      })
+      .catch(console.error);
   }
 }

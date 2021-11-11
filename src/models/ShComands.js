@@ -1,6 +1,9 @@
 import path from "path";
 import cp from "child_process";
+import { promisify } from "util";
 import { config } from "../../configs/index.js";
+
+const exec = promisify(cp.exec);
 
 export default class ShComands {
   #turn_off;
@@ -14,26 +17,26 @@ export default class ShComands {
   }
 
   tornOff() {
-    cp.exec(`sh ${this.#turn_off}`, this.logExec);
+    return new Promise((resolve, reject) => {
+      exec(`sh ${this.#turn_off}`).then(({ stdout, stderr }) =>
+        stderr ? reject(new Error(stderr)) : resolve(stdout)
+      );
+    });
   }
 
   sleep() {
-    cp.exec(`sh ${this.#sleep}`, this.logExec);
+    return new Promise((resolve, reject) => {
+      exec(`sh ${this.#sleep}`).then(({ stdout, stderr }) =>
+        stderr ? reject(new Error(stderr)) : resolve(stdout)
+      );
+    });
   }
 
   lock() {
-    cp.exec(`sh ${this.#lock}`, this.logExec);
-  }
-
-  logExec(error, stdout, stderr) {
-    if (error) {
-      console.log(`error: ${error.message}`);
-      return;
-    }
-    if (stderr) {
-      console.log(`stderr: ${stderr}`);
-      return;
-    }
-    console.log(`stdout: ${stdout}`);
+    return new Promise((resolve, reject) => {
+      exec(`sh ${this.#lock}`).then(({ stdout, stderr }) =>
+        stderr ? reject(new Error(stderr)) : resolve(stdout)
+      );
+    });
   }
 }
