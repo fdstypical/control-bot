@@ -1,0 +1,1 @@
+echo "Lock your PC"
